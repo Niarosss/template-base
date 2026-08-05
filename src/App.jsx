@@ -20,13 +20,12 @@ function AppContent({ rawMarkdown }) {
   const { openFeedback } = useFeedback();
   const [isLoading, setIsLoading] = useState(true);
 
-  // Мемоїзація важкого парсингу маркдауну
+  // Мемоїзація парсингу маркдауну
   const { greeting, signature, body } = useMemo(
     () => parseGlobals(rawMarkdown || ''),
     [rawMarkdown]
   );
 
-  // М'яке знімання лоадера після готовності кадру
   useEffect(() => {
     if (rawMarkdown) {
       const animationFrame = requestAnimationFrame(() => {

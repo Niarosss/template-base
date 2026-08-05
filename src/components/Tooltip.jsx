@@ -35,57 +35,40 @@ export function Tooltip({
       const margin = 8;
       const screenMargin = 12;
 
-      // Беремо ширину та висоту БЕЗ урахування скролбарів
       const viewportWidth = document.documentElement.clientWidth;
-      const viewportHeight = document.documentElement.clientHeight;
-
-      let actualPosition = position;
-
-      // 1. Автоперевертання за необхідності
-      if (position === 'top' && triggerRect.top - margin - tooltipRect.height < screenMargin) {
-        actualPosition = 'bottom';
-      } else if (position === 'bottom' && triggerRect.bottom + margin + tooltipRect.height > viewportHeight - screenMargin) {
-        actualPosition = 'top';
-      }
 
       let top = 0;
       let left = 0;
 
-      if (actualPosition === 'bottom') {
+      // Жорстке позиціонування за пропом position
+      if (position === 'bottom') {
         top = triggerRect.bottom + margin;
         left = triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2;
-      } else if (actualPosition === 'top') {
+      } else if (position === 'top') {
         top = triggerRect.top - margin - tooltipRect.height;
         left = triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2;
-      } else if (actualPosition === 'right') {
+      } else if (position === 'right') {
         top = triggerRect.top + triggerRect.height / 2 - tooltipRect.height / 2;
         left = triggerRect.right + margin;
-      } else if (actualPosition === 'left') {
+      } else if (position === 'left') {
         top = triggerRect.top + triggerRect.height / 2 - tooltipRect.height / 2;
         left = triggerRect.left - margin - tooltipRect.width;
       }
 
-      // 2. Клемпінг по горизонталі (зараз чітко враховує лівий край скролбару)
+      // Клемпінг ТІЛЬКИ по горизонталі (щоб не виходив за бічні межі екрана)
       if (left < screenMargin) {
         left = screenMargin;
       } else if (left + tooltipRect.width > viewportWidth - screenMargin) {
         left = viewportWidth - screenMargin - tooltipRect.width;
       }
 
-      // 3. Клемпінг по вертикалі
-      if (top < screenMargin) {
-        top = screenMargin;
-      } else if (top + tooltipRect.height > viewportHeight - screenMargin) {
-        top = viewportHeight - screenMargin - tooltipRect.height;
-      }
-
-      setCoords({ top, left, actualPosition });
+      setCoords({ top, left });
     }
   }, [isVisible, position, content]);
 
-  const effectivePosition = coords?.actualPosition || position;
-  const initialY = effectivePosition === 'bottom' ? -4 : effectivePosition === 'top' ? 4 : 0;
-  const initialX = effectivePosition === 'right' ? -4 : effectivePosition === 'left' ? 4 : 0;
+  // Анімація висування напряму від позиції
+  const fromY = position === 'bottom' ? -5 : position === 'top' ? 5 : 0;
+  const fromX = position === 'right' ? -5 : position === 'left' ? 5 : 0;
 
   return (
     <div 
@@ -106,10 +89,14 @@ export function Tooltip({
               ref={tooltipRef}
               id={tooltipId}
               role="tooltip"
-              initial={{ opacity: 0, scale: 0.94, y: initialY, x: initialX }}
-              animate={{ opacity: coords ? 1 : 0, scale: 1, y: 0, x: 0 }}
-              exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.1 } }}
-              transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+              initial={{ opacity: 0 }}
+              animate={
+                coords 
+                  ? { opacity: 1, y: [fromY, 0], x: [fromX, 0] } 
+                  : { opacity: 0 }
+              }
+              exit={{ opacity: 0, transition: { duration: 0.08 } }}
+              transition={{ duration: 0.12, ease: 'easeOut' }}
               style={{
                 position: 'fixed',
                 top: `${coords?.top ?? 0}px`,
@@ -122,7 +109,7 @@ export function Tooltip({
                 text-stone-700 dark:text-zinc-200 
                 border border-stone-300/80 dark:border-zinc-700/80 
                 shadow-lg shadow-stone-900/5 dark:shadow-black/20 
-                backdrop-blur-md"
+                backdrop-blur-md [backface-visibility:hidden] transform-gpu"
             >
               {content}
             </motion.div>

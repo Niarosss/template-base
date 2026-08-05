@@ -15,7 +15,7 @@ html {
 }
 
 html.dark {
-  background-color: #09090b; /* zinc-950 */
+  background-color: #09090b;
 }
 
 /* 1. Тільки для Firefox (щоб Chrome не вимикав ::-webkit-scrollbar) */
@@ -66,13 +66,11 @@ html.dark {
    М'ЯКЕ ВИДІЛЕННЯ ТЕКСТУ (SELECTION)
    ========================================== */
 
-/* Світла тема: м'який stone-300 + темний текст */
 ::selection {
   background-color: #d6d3d1; /* stone-300 */
   color: #1c1917;            /* stone-900 */
 }
 
-/* Темна тема: приглушений zinc-700 + світлий текст */
 .dark ::selection {
   background-color: #3f3f46; /* zinc-700 */
   color: #fafafa;            /* zinc-50 */

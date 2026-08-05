@@ -5,7 +5,7 @@ export function IconButton({
   icon: Icon,
   onClick,
   tooltip,
-  tooltipPosition = 'top',
+  tooltipPosition, // Без дефолту — прокидається в Tooltip
   active = false,
   variant = 'default', // 'default' | 'ghost'
   size = 'md', // 'sm' | 'md'
