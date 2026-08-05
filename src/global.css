@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ==========================================
+   КАСТОМНИЙ СКРОЛЛБАР
+   ========================================== */
+
+   body {
+  font-family: 'Manrope', sans-serif;
+}
+html {
+  background-color: #EEEDEC;
+}
+
+html.dark {
+  background-color: #09090b; /* zinc-950 */
+}
+
+/* 1. Тільки для Firefox (щоб Chrome не вимикав ::-webkit-scrollbar) */
+@supports (-moz-appearance: none) {
+  html {
+    scrollbar-color: #d6d3d1 #EEEDEC;
+    scrollbar-width: thin;
+  }
+  html.dark {
+    scrollbar-color: #3f3f46 #09090b;
+  }
+}
+
+/* 2. Webkit / Blink (Chrome, Edge, Safari, Brave, Opera) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #E9E7E6;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background-color: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c4c2c1;
+  border-radius: 8px;
+  border: 2px solid #E9E7E6;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #221F1D;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: #3f3f46;
+  border: 2px solid #09090b;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: #52525b;
+}
+
+/* ==========================================
+   М'ЯКЕ ВИДІЛЕННЯ ТЕКСТУ (SELECTION)
+   ========================================== */
+
+/* Світла тема: м'який stone-300 + темний текст */
+::selection {
+  background-color: #d6d3d1; /* stone-300 */
+  color: #1c1917;            /* stone-900 */
+}
+
+/* Темна тема: приглушений zinc-700 + світлий текст */
+.dark ::selection {
+  background-color: #3f3f46; /* zinc-700 */
+  color: #fafafa;            /* zinc-50 */
+}
