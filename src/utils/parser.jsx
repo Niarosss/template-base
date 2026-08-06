@@ -25,6 +25,7 @@ export function parseGlobals(rawText) {
   // Замінюємо поодинокі Enter на 2 пробіли + Enter для Markdown
   const formattedBody = body
     .trim()
+    .replace(/^(\s*)- /gm, '$1\\- ')
     .replace(/(?<!\n)\n(?!\n)/g, '  \n');
 
   return { greeting, signature, body: formattedBody };

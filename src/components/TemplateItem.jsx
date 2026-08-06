@@ -41,7 +41,6 @@ export function TemplateItem({ cardId, rawMarkdown, greeting, signature, isSelec
           rehypePlugins={[rehypeRaw]}
           components={{
             p: ({ children }) => <p>{highlightText(children, searchQuery)}</p>,
-            li: ({ children }) => <li>{highlightText(children, searchQuery)}</li>,
             a: ({ href, children }) => (
               <a
                 href={href}
