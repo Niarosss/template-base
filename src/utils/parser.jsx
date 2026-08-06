@@ -22,7 +22,12 @@ export function parseGlobals(rawText) {
     return '';
   });
 
-  return { greeting, signature, body: body.trim() };
+  // Замінюємо поодинокі Enter на 2 пробіли + Enter для Markdown
+  const formattedBody = body
+    .trim()
+    .replace(/(?<!\n)\n(?!\n)/g, '  \n');
+
+  return { greeting, signature, body: formattedBody };
 }
 
 function escapeRegExp(string) {
