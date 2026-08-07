@@ -20,7 +20,6 @@ function AppContent({ rawMarkdown }) {
   const { openFeedback } = useFeedback();
   const [isLoading, setIsLoading] = useState(true);
 
-  // Мемоїзація парсингу маркдауну
   const { greeting, signature, body } = useMemo(
     () => parseGlobals(rawMarkdown || ''),
     [rawMarkdown]
@@ -225,17 +224,25 @@ function AppContent({ rawMarkdown }) {
 
         return (
           <div key={index} className={`grid ${gridClass} gap-6 my-8 items-stretch`}>
-            {sections.map((secMd, secIdx) => (
-              <SectionBlock
-                key={secIdx}
-                sectionMd={secMd.trim()}
-                greeting={greeting}
-                signature={signature}
-                selectedId={selectedId}
-                autoSelect={autoSelect}
-                searchQuery={searchQuery}
-              />
-            ))}
+            {sections.map((secMd, secIdx) => {
+              const firstLine = secMd.trim().split('\n')[0] || '';
+              const titleMatch = firstLine.match(/^##\s*(.*)/);
+              const title = titleMatch ? titleMatch[1].trim() : '';
+              const sectionId = title ? `h2-${slugify(title)}` : undefined;
+
+              return (
+                <SectionBlock
+                  key={secIdx}
+                  id={sectionId}
+                  sectionMd={secMd.trim()}
+                  greeting={greeting}
+                  signature={signature}
+                  selectedId={selectedId}
+                  autoSelect={autoSelect}
+                  searchQuery={searchQuery}
+                />
+              );
+            })}
           </div>
         );
       }
@@ -246,6 +253,7 @@ function AppContent({ rawMarkdown }) {
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
           components={{
+            // Без highlightText — h1 не бере участі в пошуку
             h1: ({ children }) => {
               const text = Array.isArray(children) ? children.join('') : String(children || '');
               const h1Id = `h1-${slugify(text)}`;

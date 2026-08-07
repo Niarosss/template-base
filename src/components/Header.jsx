@@ -35,6 +35,12 @@ export const Header = React.forwardRef(({
       } else {
         onNextMatch();
       }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      onNextMatch();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      onPrevMatch();
     }
   };
 
@@ -110,7 +116,7 @@ export const Header = React.forwardRef(({
                       onClick={onPrevMatch}
                       type="button"
                       className="p-1 hover:text-stone-900 dark:hover:text-zinc-100 hover:bg-stone-200/60 dark:hover:bg-zinc-800 rounded transition-colors active:scale-90 cursor-pointer"
-                      title="Попередній (Shift + Enter)"
+                      title="Попередній (Shift + Enter або ↑)"
                     >
                       <CaretUpIcon size={14} />
                     </button>
@@ -118,7 +124,7 @@ export const Header = React.forwardRef(({
                       onClick={onNextMatch}
                       type="button"
                       className="p-1 hover:text-stone-900 dark:hover:text-zinc-100 hover:bg-stone-200/60 dark:hover:bg-zinc-800 rounded transition-colors active:scale-90 cursor-pointer"
-                      title="Наступний (Enter)"
+                      title="Наступний (Enter або ↓)"
                     >
                       <CaretDownIcon size={14} />
                     </button>

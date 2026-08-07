@@ -27,7 +27,7 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
             className="fixed inset-0 top-14 bg-stone-950/40 dark:bg-black/60 backdrop-blur-sm z-30 md:hidden"
           />
 
-          {/* Панель змісту з анімованою шириною */}
+          {/* Панель змісту */}
           <motion.aside
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: '18rem', opacity: 1 }}
@@ -35,7 +35,6 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
             transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
             className="fixed md:sticky top-14 left-0 h-[calc(100vh-3.5rem)] self-start flex-shrink-0 bg-stone-100/80 dark:bg-zinc-900/60 backdrop-blur-md border-r border-stone-300/70 dark:border-zinc-800 z-30 md:z-10 select-none shadow-2xl md:shadow-none overflow-hidden"
           >
-            {/* Фіксована ширина внутрішнього блоку гарантує, що текст не деформується */}
             <div className="w-72 p-4 flex flex-col h-full min-w-[18rem]">
               {/* Шапка сайдбара */}
               <div className="flex items-center justify-between pb-3 border-b border-stone-300/70 dark:border-zinc-800 flex-shrink-0">

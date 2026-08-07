@@ -24,9 +24,9 @@ export function parseGlobals(rawText) {
 
   const formattedBody = body
     .trim()
-    // 1. Синтаксис для підкреслення: ++текст++ -> <u>текст</u>
+    // Підкреслення ++текст++ -> <u>текст</u>
     .replace(/\+\+(.*?)\+\+/g, '<u>$1</u>')
-    // 2. Вимикаємо списки (дефіс залишається звичайним текстом)
+    // Вимикаємо списки (- звичайний текст)
     .replace(/^(\s*)- /gm, '$1\\- ');
 
   return { greeting, signature, body: formattedBody };

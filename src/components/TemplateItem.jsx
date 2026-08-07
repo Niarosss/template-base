@@ -40,7 +40,6 @@ export function TemplateItem({ cardId, rawMarkdown, greeting, signature, isSelec
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
           components={{
-            // pre-line відображає звичайний Enter і зберігає його при копіюванні
             p: ({ children }) => (
               <p className="whitespace-pre-line">
                 {highlightText(children, searchQuery)}
