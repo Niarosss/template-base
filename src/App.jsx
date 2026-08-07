@@ -26,6 +26,20 @@ function AppContent({ rawMarkdown }) {
   );
 
   useEffect(() => {
+    let link = document.querySelector("link[rel*='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+
+    const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".84em" font-size="84">🐼</text></svg>`;
+    link.type = 'image/svg+xml';
+    link.href = `data:image/svg+xml,${encodeURIComponent(svgIcon)}`;
+
+  }, []);
+
+  useEffect(() => {
     if (rawMarkdown) {
       const animationFrame = requestAnimationFrame(() => {
         setIsLoading(false);
