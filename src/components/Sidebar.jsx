@@ -9,7 +9,7 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
   const toggleSection = (id) => {
     setOpenSections((prev) => ({
       ...prev,
-      [id]: !prev[id],
+      [id]: prev[id] === undefined ? false : !prev[id],
     }));
   };
 
@@ -35,10 +35,9 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
             transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
             className="fixed md:sticky top-14 left-0 h-[calc(100vh-3.5rem)] self-start flex-shrink-0 bg-stone-100/80 dark:bg-zinc-900/60 backdrop-blur-md border-r border-stone-300/70 dark:border-zinc-800 z-30 md:z-10 select-none shadow-2xl md:shadow-none overflow-hidden"
           >
-            {/* Прибрано py-4 з головного контейнера */}
             <div className="w-72 flex flex-col h-full min-w-[18rem]">
               
-              {/* Верхній падінг pt-4 додано прямо у шапку */}
+              {/* Шапка */}
               <div className="flex items-center justify-between pt-4 pb-3 border-b border-stone-300/70 dark:border-zinc-800 flex-shrink-0 px-4">
                 <span className="text-xs font-bold uppercase tracking-widest text-stone-500 dark:text-zinc-400 truncate">
                   Зміст
@@ -53,7 +52,7 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
                 />
               </div>
 
-              {/* Прибрано mt-4. py-3 додано ВСЕРЕДИНУ nav, щоб скролбар йшов від лінії і до низу */}
+              {/* Навігація */}
               <nav className="flex-1 space-y-2 overflow-y-auto overflow-x-hidden overscroll-contain sidebar-scroll py-3 pl-4 pr-1">
                 {tree.map((h1Item) => {
                   const isSectionOpen = openSections[h1Item.id] !== false;
