@@ -3,13 +3,14 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+
+body {
+  font-family: 'Manrope', sans-serif;
+}
 /* ==========================================
    КАСТОМНИЙ СКРОЛЛБАР
    ========================================== */
 
-   body {
-  font-family: 'Manrope', sans-serif;
-}
 html {
   background-color: #EEEDEC;
 }
@@ -59,6 +60,46 @@ html.dark {
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
+  background-color: #52525b;
+}
+
+/* --- Скролбар для сайдбара --- */
+
+/* 1. Firefox */
+.sidebar-scroll {
+  scrollbar-color: #c4c2c1 transparent;
+  scrollbar-width: thin;
+}
+
+.dark .sidebar-scroll {
+  scrollbar-color: #3f3f46 transparent;
+}
+
+/* 2. Webkit (Chrome, Edge, Safari, Opera) */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 6px; /* Тонший скролбар краще виглядає в меню */
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background-color: transparent; /* Фон сайдбара просвічується */
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background-color: #c4c2c1;
+  border-radius: 9999px;
+  border: none;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #a8a29e;
+}
+
+.dark .sidebar-scroll::-webkit-scrollbar-thumb {
+  background-color: #3f3f46;
+  border: none;
+}
+
+.dark .sidebar-scroll::-webkit-scrollbar-thumb:hover {
   background-color: #52525b;
 }
 

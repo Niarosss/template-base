@@ -54,7 +54,7 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
               </div>
 
               {/* Прибрано mt-4. py-3 додано ВСЕРЕДИНУ nav, щоб скролбар йшов від лінії і до низу */}
-              <nav className="flex-1 space-y-2 overflow-y-auto overflow-x-hidden overscroll-contain py-3 pl-4 pr-1">
+              <nav className="flex-1 space-y-2 overflow-y-auto overflow-x-hidden overscroll-contain sidebar-scroll py-3 pl-4 pr-1">
                 {tree.map((h1Item) => {
                   const isSectionOpen = openSections[h1Item.id] !== false;
 
