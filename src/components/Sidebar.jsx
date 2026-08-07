@@ -111,7 +111,7 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
                                         : 'text-stone-600 dark:text-zinc-400 hover:bg-stone-300/40 dark:hover:bg-zinc-800/50 hover:text-stone-900 dark:hover:text-zinc-200'
                                     }`}
                                   >
-                                    <span className="truncate tracking-wider block w-full">{h2Item.title}</span>
+                                    <span className="truncate uppercase tracking-wider block w-full">{h2Item.title}</span>
                                   </button>
                                 );
                               })}

@@ -35,12 +35,25 @@ export function TemplateItem({ cardId, rawMarkdown, greeting, signature, isSelec
         )}
       </AnimatePresence>
 
-      <div ref={itemRef} className="max-w-none text-left text-sm @[500px]:text-base leading-relaxed text-stone-900 dark:text-zinc-100 space-y-3">
+      <div ref={itemRef} className="max-w-none text-left text-sm @[500px]:text-base leading-relaxed text-stone-900 dark:text-zinc-100 space-y-2">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
           components={{
-            p: ({ children }) => <p>{highlightText(children, searchQuery)}</p>,
+            // pre-line відображає звичайний Enter і зберігає його при копіюванні
+            p: ({ children }) => (
+              <p className="whitespace-pre-line">
+                {highlightText(children, searchQuery)}
+              </p>
+            ),
+            u: ({ children }) => (
+              <u className="underline underline-offset-4 decoration-stone-400 dark:decoration-zinc-500">
+                {children}
+              </u>
+            ),
+            em: ({ children }) => <em className="italic">{children}</em>,
+            i: ({ children }) => <i className="italic">{children}</i>,
+            strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
             a: ({ href, children }) => (
               <a
                 href={href}
@@ -49,7 +62,7 @@ export function TemplateItem({ cardId, rawMarkdown, greeting, signature, isSelec
                 onClick={(e) => e.stopPropagation()}
                 className="underline underline-offset-4 hover:text-orange-500 hover:decoration-orange-500 transition-colors break-all"
               >
-                {highlightText(children, searchQuery)}
+                {children}
               </a>
             ),
           }}

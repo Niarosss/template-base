@@ -22,11 +22,12 @@ export function parseGlobals(rawText) {
     return '';
   });
 
-  // Замінюємо поодинокі Enter на 2 пробіли + Enter для Markdown
   const formattedBody = body
     .trim()
-    .replace(/^(\s*)- /gm, '$1\\- ')
-    .replace(/(?<!\n)\n(?!\n)/g, '  \n');
+    // 1. Синтаксис для підкреслення: ++текст++ -> <u>текст</u>
+    .replace(/\+\+(.*?)\+\+/g, '<u>$1</u>')
+    // 2. Вимикаємо списки (дефіс залишається звичайним текстом)
+    .replace(/^(\s*)- /gm, '$1\\- ');
 
   return { greeting, signature, body: formattedBody };
 }
@@ -59,7 +60,9 @@ export function highlightText(children, query) {
   }
 
   if (Array.isArray(children)) {
-    return children.map((child, i) => <React.Fragment key={i}>{highlightText(child, query)}</React.Fragment>);
+    return children.map((child, i) => (
+      <React.Fragment key={i}>{highlightText(child, query)}</React.Fragment>
+    ));
   }
 
   if (React.isValidElement(children) && children.props && children.props.children) {
