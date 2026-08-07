@@ -10,6 +10,8 @@ import {
 import { useFeedback } from '../context/useFeedback';
 import { Modal } from './Modal';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || (typeof window !== 'undefined' ? window.location.origin : '');
+
 export function FeedbackModal() {
   const { isOpen, type: initialType, selectedText: initialSelectedText, closeFeedback } = useFeedback();
 
@@ -63,7 +65,7 @@ export function FeedbackModal() {
     setErrors({});
 
     try {
-      const response = await fetch('/api/feedback', {
+      const response = await fetch(`${API_BASE_URL}/api/feedback`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
