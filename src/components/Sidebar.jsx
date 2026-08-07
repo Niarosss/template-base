@@ -35,9 +35,11 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
             transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
             className="fixed md:sticky top-14 left-0 h-[calc(100vh-3.5rem)] self-start flex-shrink-0 bg-stone-100/80 dark:bg-zinc-900/60 backdrop-blur-md border-r border-stone-300/70 dark:border-zinc-800 z-30 md:z-10 select-none shadow-2xl md:shadow-none overflow-hidden"
           >
-            <div className="w-72 p-4 flex flex-col h-full min-w-[18rem]">
-              {/* Шапка сайдбара */}
-              <div className="flex items-center justify-between pb-3 border-b border-stone-300/70 dark:border-zinc-800 flex-shrink-0">
+            {/* 1. Замість p-4 залишаємо тільки py-4 (без горизонтального падінгу) */}
+            <div className="w-72 py-4 flex flex-col h-full min-w-[18rem]">
+              
+              {/* 2. Додаємо px-4 сюди, щоб шапка зберегла відступи */}
+              <div className="flex items-center justify-between pb-3 border-b border-stone-300/70 dark:border-zinc-800 flex-shrink-0 px-4">
                 <span className="text-xs font-bold uppercase tracking-widest text-stone-500 dark:text-zinc-400 truncate">
                   Зміст
                 </span>
@@ -51,14 +53,13 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
                 />
               </div>
 
-              {/* Дерево H1 -> H2 */}
-              <nav className="mt-4 flex-1 space-y-2 overflow-y-auto overflow-x-hidden overscroll-contain pr-1">
+              <nav className="mt-4 flex-1 space-y-2 overflow-y-auto overflow-x-hidden overscroll-contain pl-4 pr-1.5">
                 {tree.map((h1Item) => {
                   const isSectionOpen = openSections[h1Item.id] !== false;
 
                   return (
                     <div key={h1Item.id} className="space-y-1">
-                      <div className="flex items-center justify-between gap-1">
+                      <div className="flex items-center justify-between gap-1 pr-2">
                         <button
                           type="button"
                           onClick={() => {
@@ -73,6 +74,7 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
                         {h1Item.children.length > 0 && (
                           <button
                             type="button"
+                            aria-label={isSectionOpen ? 'Закрити секцію' : 'Відкрити секцію'}
                             onClick={() => toggleSection(h1Item.id)}
                             className="p-1 text-stone-400 hover:text-stone-700 dark:hover:text-zinc-200 rounded-lg hover:bg-stone-200/60 dark:hover:bg-zinc-800 transition-colors cursor-pointer flex-shrink-0"
                           >
@@ -93,7 +95,7 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
                             transition={{ duration: 0.18, ease: 'easeInOut' }}
                             className="overflow-hidden"
                           >
-                            <div className="pl-2 space-y-0.5 border-l border-stone-300/70 dark:border-zinc-800 ml-2 my-1">
+                            <div className="pl-2 space-y-0.5 border-l border-stone-300/70 dark:border-zinc-800 ml-2 my-1 pr-2">
                               {h1Item.children.map((h2Item) => {
                                 const isActive = activeId === h2Item.id;
                                 return (
