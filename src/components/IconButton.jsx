@@ -5,16 +5,20 @@ export function IconButton({
   icon: Icon,
   onClick,
   tooltip,
-  tooltipPosition, // Без дефолту — прокидається в Tooltip
+  tooltipPosition,
   active = false,
   variant = 'default', // 'default' | 'ghost'
-  size = 'md', // 'sm' | 'md'
+  size = 'md', // 'xs' | 'sm' | 'md'
   ariaLabel,
   className = '',
   type = 'button',
   ...props
 }) {
-  const sizeClasses = size === 'sm' ? 'p-1.5' : 'p-2';
+  const sizeClasses = {
+    xs: 'p-1',
+    sm: 'p-1.5',
+    md: 'p-2',
+  }[size] || 'p-2';
 
   let variantClasses = '';
   if (variant === 'ghost') {

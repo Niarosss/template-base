@@ -104,7 +104,8 @@ export function Tooltip({
                 visibility: coords ? 'visible' : 'hidden',
               }}
               className="z-[100] pointer-events-none whitespace-nowrap 
-                px-2.5 py-1 rounded-xl text-xs font-medium select-none
+                flex items-center justify-center text-center leading-none
+                px-2.5 py-1.5 rounded-xl text-xs font-medium select-none
                 bg-white/95 dark:bg-zinc-900/95 
                 text-stone-700 dark:text-zinc-200 
                 border border-stone-300/80 dark:border-zinc-700/80 

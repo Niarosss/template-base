@@ -38,65 +38,70 @@ export function Modal({ isOpen, onClose, title, subtitle, maxWidth = 'max-w-lg',
 
   // Focus Trap, Escape та повернення фокуса
   useEffect(() => {
-    if (!isOpen) return;
+  if (!isOpen) return;
 
-    previouslyFocusedElementRef.current = document.activeElement;
+  previouslyFocusedElementRef.current = document.activeElement;
 
-    const timer = setTimeout(() => {
-      if (!modalRef.current) return;
-      const focusableElements = modalRef.current.querySelectorAll(FOCUSABLE_SELECTOR);
-      if (focusableElements.length > 0) {
-        focusableElements[0].focus();
-      } else {
-        modalRef.current.focus();
-      }
-    }, 50);
+  // Фокусуємо сам контейнер (tabIndex={-1}), щоб уникнути появи тултіпа
+  const timer = setTimeout(() => {
+    modalRef.current?.focus();
+  }, 50);
 
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        onClose();
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      onClose();
+      return;
+    }
+
+    if (e.key === 'Tab' && modalRef.current) {
+      const focusableElements = Array.from(
+        modalRef.current.querySelectorAll(FOCUSABLE_SELECTOR)
+      );
+
+      if (focusableElements.length === 0) {
+        e.preventDefault();
         return;
       }
 
-      if (e.key === 'Tab' && modalRef.current) {
-        const focusableElements = Array.from(
-          modalRef.current.querySelectorAll(FOCUSABLE_SELECTOR)
-        );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
 
-        if (focusableElements.length === 0) {
-          e.preventDefault();
-          return;
-        }
-
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
+      // Якщо фокус все ще на самому контейнері модалки
+      if (document.activeElement === modalRef.current) {
+        e.preventDefault();
         if (e.shiftKey) {
-          // Shift + Tab: перехід від першого до останнього
-          if (document.activeElement === firstElement) {
-            e.preventDefault();
-            lastElement.focus();
-          }
+          lastElement.focus();
         } else {
-          // Tab: перехід від останнього до першого
-          if (document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
-          }
+          firstElement.focus();
+        }
+        return;
+      }
+
+      // Циклічний перехід між елементами
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
         }
       }
-    };
+    }
+  };
 
-    window.addEventListener('keydown', handleKeyDown);
+  window.addEventListener('keydown', handleKeyDown);
 
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('keydown', handleKeyDown);
-      if (previouslyFocusedElementRef.current?.focus) {
-        previouslyFocusedElementRef.current.focus();
-      }
-    };
-  }, [isOpen, onClose]);
+  return () => {
+    clearTimeout(timer);
+    window.removeEventListener('keydown', handleKeyDown);
+    if (previouslyFocusedElementRef.current?.focus) {
+      previouslyFocusedElementRef.current.focus();
+    }
+  };
+}, [isOpen, onClose]);
 
   return (
     <AnimatePresence onExitComplete={handleExitComplete}>

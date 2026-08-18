@@ -113,33 +113,33 @@ export const Header = React.forwardRef(({
 
                 {matchCount > 0 && (
                   <div className="flex items-center border-l border-stone-300/70 dark:border-zinc-800 pl-1 gap-0.5">
-                    <button
+                    <IconButton
+                      icon={<CaretUpIcon size={14} />}
                       onClick={onPrevMatch}
-                      type="button"
-                      className="p-1 hover:text-stone-900 dark:hover:text-zinc-100 hover:bg-stone-200/60 dark:hover:bg-zinc-800 rounded-xl transition-colors active:scale-90 cursor-pointer"
-                      title="Попередній (Shift + Enter або ↑)"
-                    >
-                      <CaretUpIcon size={14} />
-                    </button>
-                    <button
+                      variant="ghost"
+                      size="xs"
+                      tooltip="Попередній (Shift + Enter або ↑)"
+                    />
+                    <IconButton
+                      icon={<CaretDownIcon size={14} />}
                       onClick={onNextMatch}
-                      type="button"
-                      className="p-1 hover:text-stone-900 dark:hover:text-zinc-100 hover:bg-stone-200/60 dark:hover:bg-zinc-800 rounded-xl transition-colors active:scale-90 cursor-pointer"
-                      title="Наступний (Enter або ↓)"
-                    >
-                      <CaretDownIcon size={14} />
-                    </button>
+                      variant="ghost"
+                      size="xs"
+                      tooltip="Наступний (Enter або ↓)"
+                    />
                   </div>
                 )}
 
-                <button
-                  onClick={() => setSearchQuery('')}
-                  type="button"
-                  className="p-1 hover:text-stone-900 dark:hover:text-zinc-100 hover:bg-stone-200/60 dark:hover:bg-zinc-800 rounded-xl transition-colors active:scale-90 cursor-pointer"
-                  title="Очистити пошук"
-                >
-                  <XIcon size={14} />
-                </button>
+                <IconButton
+                  icon={<XIcon size={14} />}
+                  onClick={() => {
+                    setSearchQuery('');
+                    ref?.current?.focus();
+                  }}
+                  variant="ghost"
+                  size="xs"
+                  tooltip="Очистити пошук (Esc)"
+                />
               </motion.div>
             )}
           </AnimatePresence>
