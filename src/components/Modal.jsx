@@ -1,11 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { XIcon } from '@phosphor-icons/react';
 import { motion, AnimatePresence } from 'motion/react';
 import { IconButton } from './IconButton';
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export function Modal({ isOpen, onClose, title, subtitle, maxWidth = 'max-w-lg', children }) {
   const [scrollbarWidth, setScrollbarWidth] = useState(0);
+  const modalRef = useRef(null);
+  const previouslyFocusedElementRef = useRef(null);
 
+  // Блокування скролу сторінки
   useEffect(() => {
     if (isOpen) {
       const width = window.innerWidth - document.documentElement.clientWidth;
@@ -30,15 +36,66 @@ export function Modal({ isOpen, onClose, title, subtitle, maxWidth = 'max-w-lg',
     };
   }, []);
 
+  // Focus Trap, Escape та повернення фокуса
   useEffect(() => {
     if (!isOpen) return;
 
+    previouslyFocusedElementRef.current = document.activeElement;
+
+    const timer = setTimeout(() => {
+      if (!modalRef.current) return;
+      const focusableElements = modalRef.current.querySelectorAll(FOCUSABLE_SELECTOR);
+      if (focusableElements.length > 0) {
+        focusableElements[0].focus();
+      } else {
+        modalRef.current.focus();
+      }
+    }, 50);
+
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusableElements = Array.from(
+          modalRef.current.querySelectorAll(FOCUSABLE_SELECTOR)
+        );
+
+        if (focusableElements.length === 0) {
+          e.preventDefault();
+          return;
+        }
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          // Shift + Tab: перехід від першого до останнього
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          // Tab: перехід від останнього до першого
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('keydown', handleKeyDown);
+      if (previouslyFocusedElementRef.current?.focus) {
+        previouslyFocusedElementRef.current.focus();
+      }
+    };
   }, [isOpen, onClose]);
 
   return (
@@ -55,6 +112,8 @@ export function Modal({ isOpen, onClose, title, subtitle, maxWidth = 'max-w-lg',
           />
 
           <motion.div 
+            ref={modalRef}
+            tabIndex={-1}
             initial={{ opacity: 0, scale: 0.95, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ 
@@ -64,7 +123,7 @@ export function Modal({ isOpen, onClose, title, subtitle, maxWidth = 'max-w-lg',
               transition: { duration: 0.15, ease: 'easeOut' }
             }}
             transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-            className={`relative z-10 w-full ${maxWidth} rounded-2xl bg-zinc-50/80 dark:bg-zinc-900/80 p-6 shadow-xl border border-stone-200/80 dark:border-zinc-800`}
+            className={`relative z-10 w-full ${maxWidth} rounded-2xl bg-zinc-50/80 dark:bg-zinc-900/80 p-6 shadow-xl border border-stone-200/80 dark:border-zinc-800 outline-none`}
             role="dialog"
             aria-modal="true"
           >

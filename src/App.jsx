@@ -165,20 +165,42 @@ function AppContent({ rawMarkdown }) {
   };
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.code === 'KeyF') {
+  const handleKeyDown = (e) => {
+    // 1. Зворотний зв'язок на виділений текст
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      const text = window.getSelection()?.toString().trim();
+      if (text) {
         e.preventDefault();
-        e.stopPropagation();
-        if (searchInputRef.current) {
-          searchInputRef.current.focus();
-          searchInputRef.current.select();
-        }
+        openFeedback('error', text);
+        return;
       }
-    };
+    }
 
-    window.addEventListener('keydown', handleKeyDown, true);
-    return () => window.removeEventListener('keydown', handleKeyDown, true);
-  }, []);
+    // 2. Фокус на пошук (Ctrl+F, Ctrl+K, /)
+    const isSearchHotKey = (e.ctrlKey || e.metaKey) && (e.code === 'KeyF' || e.code === 'KeyK');
+    const isSlash = e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName);
+
+    if (isSearchHotKey || isSlash) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (searchInputRef.current) {
+        searchInputRef.current.focus();
+        searchInputRef.current.select();
+      }
+      return;
+    }
+
+    // 3. Системний перехід F3 / Shift+F3
+    if (e.key === 'F3') {
+      e.preventDefault();
+      if (e.shiftKey) handlePrevMatch();
+      else handleNextMatch();
+    }
+  };
+
+  window.addEventListener('keydown', handleKeyDown, true);
+  return () => window.removeEventListener('keydown', handleKeyDown, true);
+}, [openFeedback, activeMatchIndex, matchCount]);
 
   useEffect(() => {
     const handleSelectionChange = () => {

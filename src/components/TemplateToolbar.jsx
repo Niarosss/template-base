@@ -43,7 +43,7 @@ export function TemplateToolbar({ itemRef, greeting, signature }) {
     transition={{ duration: 0.15, ease: 'easeOut' }}
     onMouseDown={(e) => e.preventDefault()}
     onClick={(e) => e.stopPropagation()}
-    className="floating-toolbar absolute -top-12 left-1/2 bg-zinc-900/80 dark:bg-zinc-950/80 backdrop-blur-xl text-zinc-100 rounded-2xl border border-zinc-800 dark:border-zinc-800/80 shadow-xl shadow-stone-950/30 dark:shadow-none ring-1 ring-black/10 dark:ring-white/5 px-2 py-1.5 flex items-center gap-2 z-30 text-xs whitespace-nowrap select-none"
+    className="floating-toolbar transform-gpu will-change-transform backface-hidden antialiased absolute -top-12 left-1/2 bg-zinc-900/80 dark:bg-zinc-950/80 backdrop-blur-xl text-zinc-100 rounded-2xl border border-zinc-800 dark:border-zinc-800/80 shadow-xl shadow-stone-950/30 dark:shadow-none ring-1 ring-black/10 dark:ring-white/5 px-2 py-1.5 flex items-center gap-2 z-30 text-xs whitespace-nowrap select-none"
     >
       {/* Кнопка копіювання */}
       <button

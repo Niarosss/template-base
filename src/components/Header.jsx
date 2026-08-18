@@ -30,17 +30,18 @@ export const Header = React.forwardRef(({
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (e.shiftKey) {
-        onPrevMatch();
-      } else {
-        onNextMatch();
-      }
+      if (e.shiftKey) onPrevMatch();
+      else onNextMatch();
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
       onNextMatch();
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       onPrevMatch();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setSearchQuery('');
+      ref?.current?.blur();
     }
   };
 
@@ -83,7 +84,7 @@ export const Header = React.forwardRef(({
           className="w-full pl-10 pr-28 py-1.5 bg-white/80 dark:bg-zinc-950/60 hover:bg-white dark:hover:bg-zinc-950/90 border border-stone-300/80 dark:border-zinc-800 hover:border-stone-400 dark:hover:border-zinc-700 rounded-2xl text-sm font-sans text-stone-700 dark:text-zinc-200 placeholder:text-stone-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500/70 transition-all shadow-sm"
         />
 
-        <div className="absolute right-2.5 flex items-center gap-1 text-xs text-stone-400 dark:text-zinc-500">
+        <div className="absolute right-2 flex items-center gap-1 text-xs text-stone-400 dark:text-zinc-500">
           <AnimatePresence mode="wait">
             {!searchQuery && (
               <motion.div
@@ -106,7 +107,7 @@ export const Header = React.forwardRef(({
                 transition={{ duration: 0.12 }}
                 className="flex items-center gap-1"
               >
-                <span className="text-[11px] font-mono px-1 select-none text-stone-500 dark:text-zinc-400 font-medium">
+                <span className="text-[11px] font-mono px-1 select-none text-stone-500 dark:text-zinc-400 font-medium leading-0">
                   {matchCount > 0 ? `${activeMatchIndex + 1}/${matchCount}` : '0/0'}
                 </span>
 
@@ -115,7 +116,7 @@ export const Header = React.forwardRef(({
                     <button
                       onClick={onPrevMatch}
                       type="button"
-                      className="p-1 hover:text-stone-900 dark:hover:text-zinc-100 hover:bg-stone-200/60 dark:hover:bg-zinc-800 rounded transition-colors active:scale-90 cursor-pointer"
+                      className="p-1 hover:text-stone-900 dark:hover:text-zinc-100 hover:bg-stone-200/60 dark:hover:bg-zinc-800 rounded-xl transition-colors active:scale-90 cursor-pointer"
                       title="Попередній (Shift + Enter або ↑)"
                     >
                       <CaretUpIcon size={14} />
@@ -123,7 +124,7 @@ export const Header = React.forwardRef(({
                     <button
                       onClick={onNextMatch}
                       type="button"
-                      className="p-1 hover:text-stone-900 dark:hover:text-zinc-100 hover:bg-stone-200/60 dark:hover:bg-zinc-800 rounded transition-colors active:scale-90 cursor-pointer"
+                      className="p-1 hover:text-stone-900 dark:hover:text-zinc-100 hover:bg-stone-200/60 dark:hover:bg-zinc-800 rounded-xl transition-colors active:scale-90 cursor-pointer"
                       title="Наступний (Enter або ↓)"
                     >
                       <CaretDownIcon size={14} />
@@ -134,7 +135,7 @@ export const Header = React.forwardRef(({
                 <button
                   onClick={() => setSearchQuery('')}
                   type="button"
-                  className="p-1 hover:text-stone-900 dark:hover:text-zinc-100 hover:bg-stone-200/60 dark:hover:bg-zinc-800 rounded transition-colors active:scale-90 cursor-pointer"
+                  className="p-1 hover:text-stone-900 dark:hover:text-zinc-100 hover:bg-stone-200/60 dark:hover:bg-zinc-800 rounded-xl transition-colors active:scale-90 cursor-pointer"
                   title="Очистити пошук"
                 >
                   <XIcon size={14} />
