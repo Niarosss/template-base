@@ -33,12 +33,12 @@ export function Sidebar({ tree = [], activeId, onSelectHeading, isOpen, onClose 
             animate={{ width: '18rem', opacity: 1 }}
             exit={{ width: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed md:sticky top-14 left-0 h-[calc(100vh-3.5rem)] self-start flex-shrink-0 bg-stone-100/80 dark:bg-zinc-900/60 backdrop-blur-md border-r border-stone-300/70 dark:border-zinc-800 z-30 md:z-10 select-none shadow-2xl md:shadow-none overflow-hidden"
+            className="fixed md:sticky top-14 left-0 h-[calc(100vh-3.5rem)] self-start shrink-0 bg-stone-100/80 dark:bg-zinc-800/60 backdrop-blur-md border-r border-stone-300/70 dark:border-zinc-800 z-30 md:z-10 select-none shadow-2xl md:shadow-none overflow-hidden"
           >
             <div className="w-72 flex flex-col h-full min-w-[18rem]">
               
               {/* Шапка */}
-              <div className="flex items-center justify-between pt-4 pb-3 border-b border-stone-300/70 dark:border-zinc-800 flex-shrink-0 px-4">
+              <div className="flex items-center justify-between pt-4 pb-3 border-b border-stone-300/70 dark:border-zinc-800 shrink-0 px-4">
                 <span className="text-xs font-bold uppercase tracking-widest text-stone-500 dark:text-zinc-400 truncate">
                   Зміст
                 </span>

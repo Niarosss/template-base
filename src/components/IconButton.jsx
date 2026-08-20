@@ -29,7 +29,7 @@ export function IconButton({
       'bg-stone-200/90 dark:bg-zinc-800 border border-stone-300 dark:border-zinc-700 text-stone-900 dark:text-zinc-100 shadow-sm';
   } else {
     variantClasses =
-      'bg-white/80 dark:bg-zinc-900/80 border border-stone-300/80 dark:border-zinc-800 hover:bg-stone-200/60 dark:hover:bg-zinc-800 text-stone-600 dark:text-zinc-400 hover:text-stone-900 dark:hover:text-zinc-100 shadow-sm';
+      'bg-white/80 dark:bg-zinc-900/50 border border-stone-300/80 dark:border-zinc-800 hover:bg-stone-200/60 dark:hover:bg-zinc-800 text-stone-600 dark:text-zinc-400 hover:text-stone-900 dark:hover:text-zinc-100 shadow-sm';
   }
 
   const buttonElement = (
@@ -37,7 +37,7 @@ export function IconButton({
       type={type}
       onClick={onClick}
       aria-label={ariaLabel || tooltip}
-      className={`rounded-xl transition-all duration-150 active:scale-95 cursor-pointer flex-shrink-0 flex items-center justify-center ${sizeClasses} ${variantClasses} ${className}`}
+      className={`rounded-xl transition-all duration-150 active:scale-95 cursor-pointer flex-zzzshrink-0 flex items-center justify-center ${sizeClasses} ${variantClasses} ${className}`}
       {...props}
     >
       {Icon}

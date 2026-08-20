@@ -23,7 +23,7 @@ export function TemplateItem({ cardId, rawMarkdown, greeting, signature, isSelec
     <div
       data-card-id={cardId}
       onClick={handleClick}
-      className="template-item relative p-3 rounded-2xl transition-all cursor-text select-text hover:bg-stone-200/80 dark:hover:bg-zinc-900/60"
+      className="template-item relative p-3 rounded-2xl transition-all cursor-text select-text hover:bg-stone-200/80 dark:hover:bg-zinc-800/60"
     >
       <AnimatePresence>
         {isSelected && (
@@ -35,7 +35,7 @@ export function TemplateItem({ cardId, rawMarkdown, greeting, signature, isSelec
         )}
       </AnimatePresence>
 
-      <div ref={itemRef} className="max-w-none text-left text-sm @[500px]:text-base leading-relaxed text-stone-900 dark:text-zinc-100 space-y-2">
+      <div ref={itemRef} className="max-w-none text-left text-sm @[500px]:text-base leading-relaxed text-stone-900 dark:text-zinc-200 space-y-2">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}

@@ -15,7 +15,7 @@ export function SettingsModal({ isOpen, onClose, theme, setTheme, autoSelect, se
           <label className="text-[11px] font-bold uppercase tracking-wider text-stone-500 dark:text-zinc-400">
             Тема оформлення
           </label>
-          <div className="grid grid-cols-3 gap-1.5 p-1 bg-stone-200/70 dark:bg-zinc-950/60 border border-stone-300/60 dark:border-zinc-800/80 rounded-2xl text-xs font-medium">
+          <div className="grid grid-cols-3 gap-1.5 p-1 bg-stone-200/70 dark:bg-zinc-900/60 border border-stone-300/60 dark:border-zinc-800/80 rounded-2xl text-xs font-medium">
             <button
               type="button"
               onClick={() => setTheme('light')}

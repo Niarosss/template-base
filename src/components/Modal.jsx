@@ -128,7 +128,7 @@ export function Modal({ isOpen, onClose, title, subtitle, maxWidth = 'max-w-lg',
               transition: { duration: 0.15, ease: 'easeOut' }
             }}
             transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-            className={`relative z-10 w-full ${maxWidth} rounded-2xl bg-zinc-50/80 dark:bg-zinc-900/80 p-6 shadow-xl border border-stone-200/80 dark:border-zinc-800 outline-none`}
+            className={`relative z-10 w-full ${maxWidth} rounded-2xl bg-zinc-50/80 dark:bg-zinc-800/80 p-6 shadow-xl border border-stone-200/80 dark:border-zinc-800 outline-none`}
             role="dialog"
             aria-modal="true"
           >

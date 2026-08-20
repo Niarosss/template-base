@@ -46,7 +46,7 @@ export const Header = React.forwardRef(({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full h-14 backdrop-blur-md backdrop-saturate-150 bg-stone-100/80 dark:bg-zinc-900/70 border-b border-stone-300/70 dark:border-zinc-800/80 px-4 flex items-center justify-between gap-3 select-none transition-colors duration-200">
+    <header className="sticky top-0 z-40 w-full h-14 backdrop-blur-md backdrop-saturate-150 bg-stone-100/80 dark:bg-zinc-800/60 border-b border-stone-300/70 dark:border-zinc-800/80 px-4 flex items-center justify-between gap-3 select-none transition-colors duration-200">
       {/* Ліва частина */}
       <div className="flex items-center gap-3 min-w-0">
         <IconButton
@@ -81,7 +81,7 @@ export const Header = React.forwardRef(({
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Пошук..."
-          className="w-full pl-10 pr-28 py-1.5 bg-white/80 dark:bg-zinc-950/60 hover:bg-white dark:hover:bg-zinc-950/90 border border-stone-300/80 dark:border-zinc-800 hover:border-stone-400 dark:hover:border-zinc-700 rounded-2xl text-sm font-sans text-stone-700 dark:text-zinc-200 placeholder:text-stone-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500/70 transition-all shadow-sm"
+          className="w-full pl-10 pr-28 py-1.5 bg-white/80 dark:bg-zinc-900/50 hover:bg-white dark:hover:bg-zinc-900/90 border border-stone-300/80 dark:border-zinc-800 hover:border-stone-400 dark:hover:border-zinc-700 rounded-2xl text-sm font-sans text-stone-700 dark:text-zinc-200 placeholder:text-stone-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500/70 transition-all shadow-sm"
         />
 
         <div className="absolute right-2 flex items-center gap-1 text-xs text-stone-400 dark:text-zinc-500">
@@ -147,7 +147,7 @@ export const Header = React.forwardRef(({
       </div>
 
       {/* Права частина */}
-      <div className="flex items-center gap-2 flex-shrink-0">
+      <div className="flex items-center gap-2 shrink-0">
         <IconButton
           icon={<ChatDotsIcon size={18} />}
           onClick={() => openFeedback('feedback')}

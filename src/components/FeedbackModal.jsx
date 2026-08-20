@@ -129,7 +129,7 @@ export function FeedbackModal() {
           )}
 
           {/* Перемикач типу відгуку */}
-          <div className="grid grid-cols-3 gap-1.5 p-1 bg-stone-200/70 dark:bg-zinc-950/60 border border-stone-300/60 dark:border-zinc-800/80 rounded-2xl text-xs font-medium">
+          <div className="grid grid-cols-3 gap-1.5 p-1 bg-stone-200/70 dark:bg-zinc-900/60 border border-stone-300/60 dark:border-zinc-800/80 rounded-2xl text-xs font-medium">
             <button
               type="button"
               onClick={() => setType('error')}
@@ -218,7 +218,7 @@ export function FeedbackModal() {
                   ? 'Опишіть ситуацію чи тему для нових шаблонів...' 
                   : 'Ваші враження чи пропозиції...'
               }
-              className={`w-full px-3.5 py-2.5 bg-white dark:bg-zinc-950/60 hover:bg-white dark:hover:bg-zinc-950/90 border rounded-2xl text-sm font-sans text-stone-800 dark:text-zinc-200 placeholder:text-stone-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 transition-all resize-none shadow-sm leading-relaxed ${
+              className={`w-full px-3.5 py-2.5 bg-white dark:bg-zinc-900/70 hover:bg-white dark:hover:bg-zinc-900 border rounded-2xl text-sm font-sans text-stone-800 dark:text-zinc-200 placeholder:text-stone-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 transition-all resize-none shadow-sm leading-relaxed ${
                 errors.message 
                   ? 'border-rose-500/80 focus:ring-rose-500/20 focus:border-rose-500' 
                   : 'border-stone-300/80 dark:border-zinc-800 hover:border-stone-400 dark:hover:border-zinc-700 focus:ring-orange-500/20 focus:border-orange-500/70'
@@ -255,7 +255,7 @@ export function FeedbackModal() {
                 if (errors.contact) setErrors((prev) => ({ ...prev, contact: null }));
               }}
               placeholder="Telegram @username або Email"
-              className={`w-full px-3.5 py-2 bg-white dark:bg-zinc-950/60 hover:bg-white dark:hover:bg-zinc-950/90 border rounded-2xl text-sm font-sans text-stone-800 dark:text-zinc-200 placeholder:text-stone-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 transition-all shadow-sm ${
+              className={`w-full px-3.5 py-2 bg-white dark:bg-zinc-900/70 hover:bg-white dark:hover:bg-zinc-900 border rounded-2xl text-sm font-sans text-stone-800 dark:text-zinc-200 placeholder:text-stone-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 transition-all shadow-sm ${
                 errors.contact
                   ? 'border-rose-500/80 focus:ring-rose-500/20 focus:border-rose-500'
                   : 'border-stone-300/80 dark:border-zinc-800 hover:border-stone-400 dark:hover:border-zinc-700 focus:ring-orange-500/20 focus:border-orange-500/70'

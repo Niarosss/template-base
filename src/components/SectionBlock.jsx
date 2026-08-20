@@ -23,15 +23,15 @@ export function SectionBlock({ id, sectionMd, greeting, signature, selectedId, a
   return (
     <div 
       id={computedId}
-      className="scroll-mt-24 bg-stone-100/60 dark:bg-zinc-900/40 border border-stone-300/70 dark:border-zinc-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col"
+      className="scroll-mt-24 bg-stone-100/60 dark:bg-zinc-800/40 border border-stone-300/70 dark:border-zinc-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col"
     >
       {/* Заголовок секції (h2) підсвічується при пошуку */}
       {title && (
-        <div className="select-none flex-shrink-0 mb-3">
+        <div className="select-none shrink-0 mb-3">
           <h2 className="uppercase tracking-[0.18em] text-md md:text-lg font-semibold text-stone-900 dark:text-zinc-100 text-center pb-3">
             {highlightText(title, searchQuery)}
           </h2>
-          <div className="w-full h-[1px] bg-stone-300/80 dark:bg-zinc-800" />
+          <div className="w-full h-px bg-stone-300/80 dark:bg-zinc-800" />
         </div>
       )}
 
@@ -42,8 +42,8 @@ export function SectionBlock({ id, sectionMd, greeting, signature, selectedId, a
           return (
             <React.Fragment key={cardId}>
               {idx > 0 && (
-                <div className="flex justify-center my-3.5 flex-shrink-0">
-                  <div className="w-12 h-[1px] bg-stone-300/70 dark:bg-zinc-800/80 rounded-full" />
+                <div className="flex justify-center my-3.5 shrink-0">
+                  <div className="w-12 h-px bg-stone-300/70 dark:bg-zinc-800/80 rounded-full" />
                 </div>
               )}
               <TemplateItem

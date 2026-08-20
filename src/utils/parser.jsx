@@ -49,7 +49,7 @@ export function highlightText(children, query) {
       part.toLowerCase() === cleanQuery.toLowerCase() ? (
         <mark 
           key={i} 
-          className="search-highlight bg-amber-300 dark:bg-amber-500/80 text-slate-950 rounded-sm px-0.5 transition-all duration-200"
+          className="search-highlight  text-slate-950 rounded-sm transition-all duration-200"
         >
           {part}
         </mark>

@@ -103,14 +103,14 @@ export function Tooltip({
                 left: `${coords?.left ?? 0}px`,
                 visibility: coords ? 'visible' : 'hidden',
               }}
-              className="z-[100] pointer-events-none whitespace-nowrap 
+              className="z-100 pointer-events-none whitespace-nowrap 
                 flex items-center justify-center text-center leading-none
                 px-2.5 py-1.5 rounded-xl text-xs font-medium select-none
                 bg-white/95 dark:bg-zinc-900/95 
                 text-stone-700 dark:text-zinc-200 
                 border border-stone-300/80 dark:border-zinc-700/80 
                 shadow-lg shadow-stone-900/5 dark:shadow-black/20 
-                backdrop-blur-md [backface-visibility:hidden] transform-gpu"
+                backdrop-blur-md backface-hidden transform-gpu"
             >
               {content}
             </motion.div>

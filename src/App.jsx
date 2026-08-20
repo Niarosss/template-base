@@ -122,10 +122,10 @@ function AppContent({ rawMarkdown }) {
   const updateActiveMark = (marks, index) => {
     marks.forEach((m, i) => {
       if (i === index) {
-        m.classList.add('ring-1', 'ring-indigo-500', 'bg-amber-400', 'dark:bg-amber-400');
+        m.classList.add('bg-amber-400', 'dark:bg-amber-500');
         m.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        m.classList.remove('ring-1', 'ring-indigo-500', 'bg-amber-400', 'dark:bg-amber-400');
+        m.classList.remove('bg-amber-400', 'dark:bg-amber-500');
       }
     });
   };
@@ -308,7 +308,7 @@ function AppContent({ rawMarkdown }) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-stone-200/60 dark:bg-zinc-950 text-stone-900 dark:text-zinc-100 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-stone-200/60 dark:bg-zinc-900 text-stone-900 dark:text-zinc-200 transition-colors duration-200">
       <AnimatePresence>
         {isLoading && <PacmanLoader key="pacman-loader" />}
       </AnimatePresence>
