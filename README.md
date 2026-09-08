@@ -4,6 +4,10 @@
 
 A modern React-based template for creating interactive documentation and knowledge bases from Markdown. It provides a ready-to-use interface with navigation, search, theme switching, responsive layouts, feedback support, and configurable content blocks, allowing you to focus on the content instead of building the documentation interface from scratch.
 
+## Demo
+
+👉 [**View the live version**](template-base-six.vercel.app)
+
 ## Features
 
 * **Markdown-Based Content**: Write documentation using standard Markdown with GitHub Flavored Markdown support.
